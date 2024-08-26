@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Zap } from 'lucide-react';
 
-const InfoItem = ({ title, description }) => (
+const InfoItem = ({ title, description } : {title : string, description: string }) => (
   <motion.div 
     className="mb-8"
     initial={{ opacity: 0, y: 20 }}

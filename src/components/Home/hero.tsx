@@ -1,30 +1,68 @@
-import { useState } from 'react'
-import { motion } from 'framer-motion'
+import React, { useState } from 'react'
+import { motion, Variants } from 'framer-motion'
 import { Button } from "~/components/ui/button"
 import { Input } from "~/components/ui/input"
 import { Card, CardContent } from "~/components/ui/card"
-import { Bitcoin, Search, Briefcase, TrendingUp } from "lucide-react"
+import { Bitcoin, Search, Briefcase, TrendingUp, LucideIcon } from "lucide-react"
 
-export default function Hero() {
-  const [searchQuery, setSearchQuery] = useState('')
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        delayChildren: 0.3,
-        staggerChildren: 0.2
-      }
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      delayChildren: 0.3,
+      staggerChildren: 0.2
     }
   }
+}
 
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1
-    }
+const itemVariants: Variants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1
+  }
+}
+
+interface AnimatedCardProps {
+  icon: React.ReactElement<LucideIcon>;
+  title: string;
+  description: string;
+}
+
+const AnimatedCard: React.FC<AnimatedCardProps> = ({ icon, title, description }) => (
+  <motion.div
+    whileHover={{ scale: 1.05, boxShadow: "0px 0px 8px rgb(139, 92, 246)" }}
+    className="bg-white/10 border-white/20 rounded-lg overflow-hidden transition-all duration-300"
+  >
+    <Card>
+      <CardContent className="flex items-center space-x-4 p-4">
+        {icon}
+        <div className="space-y-1">
+          <motion.p
+            className="text-sm font-medium leading-none"
+            whileHover={{ scale: 1.1 }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          >
+            {title}
+          </motion.p>
+          <p className="text-sm text-purple-500">{description}</p>
+        </div>
+      </CardContent>
+    </Card>
+  </motion.div>
+)
+
+const Hero: React.FC = () => {
+  const [searchQuery, setSearchQuery] = useState<string>('')
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value)
+  }
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    // Handle form submission
   }
 
   return (
@@ -59,13 +97,13 @@ export default function Hero() {
             </p>
           </motion.div>
           <motion.div className="w-full max-w-sm space-y-2" variants={itemVariants}>
-            <form onSubmit={(e) => e.preventDefault()} className="flex space-x-2">
+            <form onSubmit={handleSubmit} className="flex space-x-2">
               <Input
                 className="flex-1 bg-white/10 text-white placeholder:text-zinc-300 focus:ring-2 focus:ring-purple-400 transition-all duration-300"
                 placeholder="Search for jobs"
                 type="text"
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={handleSearchChange}
               />
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Button type="submit" className="bg-purple-600 text-white hover:bg-purple-700 transition-colors duration-300">
@@ -86,25 +124,4 @@ export default function Hero() {
   )
 }
 
-const AnimatedCard = ({ icon, title, description }) => (
-  <motion.div
-    whileHover={{ scale: 1.05, boxShadow: "0px 0px 8px rgb(139, 92, 246)" }}
-    className="bg-white/10 border-white/20 rounded-lg overflow-hidden transition-all duration-300"
-  >
-    <Card>
-      <CardContent className="flex items-center space-x-4 p-4">
-        {icon}
-        <div className="space-y-1">
-          <motion.p
-            className="text-sm font-medium leading-none"
-            whileHover={{ scale: 1.1 }}
-            transition={{ type: "spring", stiffness: 400, damping: 10 }}
-          >
-            {title}
-          </motion.p>
-          <p className="text-sm text-purple-500">{description}</p>
-        </div>
-      </CardContent>
-    </Card>
-  </motion.div>
-)
+export default Hero
