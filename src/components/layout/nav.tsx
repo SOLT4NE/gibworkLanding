@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import Link from 'next/link';
 import Image from "next/image";
 import { motion } from 'framer-motion';
@@ -10,7 +10,21 @@ import {
 } from "~/components/ui/sheet";
 import { CirclePlus, CheckSquare, HelpCircle, Gift, User, Menu } from 'lucide-react';
 
-export const Navbar = () => {
+// Define the types for the NavItem component props
+interface NavItemProps {
+  href: string;
+  icon: ReactNode;
+  text: string;
+}
+
+interface AnimatedButtonProps {
+  children: ReactNode;
+  className?: string;
+  [key: string]: any; // Accepts any additional props
+}
+
+// Navbar Component
+export const Navbar: React.FC = () => {
   return (
     <motion.nav 
       className="bg-white border-b border-gray-200"
@@ -68,7 +82,8 @@ export const Navbar = () => {
   );
 };
 
-const NavItem = ({ href, icon, text }) => (
+// NavItem Component
+const NavItem: React.FC<NavItemProps> = ({ href, icon, text }) => (
   <motion.div
     whileHover={{ scale: 1.1 }}
     whileTap={{ scale: 0.95 }}
@@ -80,7 +95,8 @@ const NavItem = ({ href, icon, text }) => (
   </motion.div>
 );
 
-const MobileNavItem = ({ href, icon, text }) => (
+// MobileNavItem Component with same props as NavItem
+const MobileNavItem: React.FC<NavItemProps> = ({ href, icon, text }) => (
   <motion.div
     whileHover={{ scale: 1.05 }}
     whileTap={{ scale: 0.95 }}
@@ -92,7 +108,8 @@ const MobileNavItem = ({ href, icon, text }) => (
   </motion.div>
 );
 
-const AnimatedButton = ({ children, className, ...props }) => (
+// AnimatedButton Component
+const AnimatedButton: React.FC<AnimatedButtonProps> = ({ children, className, ...props }) => (
   <motion.div
     whileHover={{ scale: 1.05 }}
     whileTap={{ scale: 0.95 }}
