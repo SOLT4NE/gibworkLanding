@@ -8,14 +8,14 @@ const testimonials = [
     role: "Blockchain Developer",
     company: "DeFi Solutions",
     image: "https://pbs.twimg.com/profile_images/1742907058091884544/9e2It_B7_400x400.jpg",
-    quote: "This platform connected me with cutting-edge projects in the Web3 space. It's been instrumental in advancing my career in blockchain technology."
+    quote: "This platform connected me with cutting-edge projects in the Web3 space. It&apos;s been instrumental in advancing my career in blockchain technology."
   },
   {
     name: "Samantha Lee",
     role: "Crypto Analyst",
     company: "Token Metrics",
     image: "https://pbs.twimg.com/profile_images/1819839466342666240/c2LjEDMG_400x400.jpg",
-    quote: "The community here is unparalleled. I've found not just job opportunities, but a network of like-minded professionals passionate about decentralized finance."
+    quote: "The community here is unparalleled. I&apos;ve found not just job opportunities, but a network of like-minded professionals passionate about decentralized finance."
   },
   {
     name: "Marcus Wei",
@@ -52,7 +52,6 @@ const Testimonials = () => {
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className="w-full h-auto">
             <path fill="#ffffff" fillOpacity="1" d="M0,96L1440,32L1440,0L0,0Z"></path>
           </svg>
-          
         </div>
         <div className="relative px-4 pt-24 pb-16">
           <h2 className="text-3xl font-bold text-center mb-12">What Our Community Says</h2>
@@ -74,7 +73,6 @@ const Testimonials = () => {
                   transition={{ duration: 0.5 }}
                   className="bg-white/10 backdrop-blur-md rounded-lg p-8 max-w-3xl mx-auto"
                 >
-                  {/* Testimonial content (keep existing structure) */}
                   <div className="flex flex-col md:flex-row items-center mb-6">
                     <img 
                       src={testimonials[currentIndex].image} 
@@ -87,7 +85,7 @@ const Testimonials = () => {
                       <p className="text-indigo-300">{testimonials[currentIndex].company}</p>
                     </div>
                   </div>
-                  <blockquote className="text-lg italic mb-4">"{testimonials[currentIndex].quote}"</blockquote>
+                  <blockquote className="text-lg italic mb-4">&ldquo;{testimonials[currentIndex].quote}&rdquo;</blockquote>
                   <div className="flex justify-center">
                     {[...Array(5)].map((_, i) => (
                       <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
@@ -96,18 +94,6 @@ const Testimonials = () => {
                 </motion.div>
               </AnimatePresence>
             </motion.div>
-            {/* <button 
-              onClick={prevTestimonial} 
-              className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-purple-700 p-2 rounded-full hover:bg-purple-600 transition-colors"
-            >
-              <ChevronLeft className="w-6 h-6" />
-            </button>
-            <button 
-              onClick={nextTestimonial} 
-              className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-purple-700 p-2 rounded-full hover:bg-purple-600 transition-colors"
-            >
-              <ChevronRight className="w-6 h-6" />
-            </button> */}
           </div>
           <div className="flex justify-center mt-6 space-x-2">
             {testimonials.map((_, index) => (
